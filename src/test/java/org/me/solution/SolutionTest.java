@@ -9,10 +9,11 @@ import java.util.List;
 
 class SolutionTest {
 
+    private final Solution s = new Solution();
+
     @ParameterizedTest
     @MethodSource("canConstructTestArguments")
-    void canConstructTest(String ransomNote, String magazine, boolean expected) {
-        Solution s = new Solution();
+    void testCanConstruct(String ransomNote, String magazine, boolean expected) {
         Assertions.assertEquals(expected, s.canConstruct(ransomNote, magazine));
     }
 
@@ -25,4 +26,17 @@ class SolutionTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("numberOfStepsArguments")
+    void testNumberOfSteps(int num, int expectedSteps) {
+        Assertions.assertEquals(expectedSteps, s.numberOfSteps(num));
+    }
+
+    private static List<Arguments> numberOfStepsArguments() {
+        return List.of(
+                Arguments.arguments(14, 6),
+                Arguments.arguments(8, 4),
+                Arguments.arguments(123, 12)
+        );
+    }
 }
