@@ -16,3 +16,5 @@ jobs:
 
       - name: Run generated workflow
         run: gh workflow run maven-workflow.yml
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN }}
