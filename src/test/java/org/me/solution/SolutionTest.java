@@ -39,4 +39,18 @@ class SolutionTest {
                 Arguments.arguments(123, 12)
         );
     }
+
+    @ParameterizedTest
+    @MethodSource("fizzBuzzArguments")
+    void testFizzBuzz(int num, List<String> expected) {
+        Assertions.assertEquals(expected, s.fizzBuzz(num));
+    }
+
+    private static List<Arguments> fizzBuzzArguments() {
+        return List.of(
+                Arguments.arguments(3, List.of("1","2","Fizz")),
+                Arguments.arguments(5, List.of("1","2","Fizz","4","Buzz")),
+                Arguments.arguments(15, List.of("1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"))
+        );
+    }
 }

@@ -1,7 +1,10 @@
 package org.me.solution;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class Solution {
 
@@ -43,5 +46,21 @@ public class Solution {
             counter++;
         }
         return counter;
+    }
+
+    public List<String> fizzBuzz(int n) {
+        List<String> result = new ArrayList<>();
+        IntStream.range(1, n + 1).forEach(i -> {
+            if ((i % 3 == 0) && (i % 5 == 0)) {
+                result.add("FizzBuzz");
+            } else if ((i % 3 == 0) && (i % 5 != 0)) {
+                result.add("Fizz");
+            } else if ((i % 3 != 0) && (i % 5 == 0)) {
+                result.add("Buzz");
+            } else {
+                result.add(String.valueOf(i));
+            }
+        });
+        return result;
     }
 }
