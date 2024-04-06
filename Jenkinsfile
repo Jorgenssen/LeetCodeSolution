@@ -8,7 +8,7 @@ pipeline {
             }
 
             post {
-                success {
+                always {
                     allure([
                         includeProperties: false,
                         jdk: '17',
