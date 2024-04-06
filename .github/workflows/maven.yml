@@ -28,8 +28,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build and Run Rests
-      run: mvn clean test
+    - name: Build
+      run: mvn --batch-mode -DskipTests clean package
+
+    - name: Test
+      run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
 
     - name: Report
       uses: dorny/test-reporter@v1
