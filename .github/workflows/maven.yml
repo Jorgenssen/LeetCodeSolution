@@ -16,9 +16,8 @@ on:
 
 jobs:
   build:
-
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
       with:
@@ -33,13 +32,13 @@ jobs:
 
     - name: Build
       run: mvn --batch-mode -DskipTests clean package
-      with:
-        name: Build
 
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
     - name: Test
       run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
-      with:
-        name: Test
 
     - name: Report
       uses: dorny/test-reporter@v1
