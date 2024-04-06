@@ -25,13 +25,12 @@ public class Solution {
         for (int j = 0; j < ransomNote.length(); j++) {
             char r = ransomNote.charAt(j);
             int currentCount = magazineLetters.getOrDefault(r, 0);
-
             if (currentCount == 0) {
                 return false;
             }
-
             magazineLetters.put(r, --currentCount);
         }
+
         return true;
     }
 
