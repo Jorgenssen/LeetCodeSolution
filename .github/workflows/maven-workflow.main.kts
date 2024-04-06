@@ -14,7 +14,6 @@ val generateReportAction = CustomAction(
     actionName = "test-reporter",
     actionVersion = "v1",
     inputs = linkedMapOf(
-        "if" to "always()",
         "name" to "Maven Test Report",
         "path" to "target/surefire-reports/*.xml",
         "reporter" to "java-junit",
@@ -27,7 +26,11 @@ workflow(
     on = listOf(Push(branches = listOf("main"))),
     sourceFile = __FILE__.toPath(),
 ) {
-    job(id = "BuildAndTest", runsOn = RunnerType.UbuntuLatest) {
+    job(
+        id = "BuildAndTest",
+        name = "Build And Test",
+        runsOn = RunnerType.UbuntuLatest
+    ) {
         uses(name = "Check out", action = CheckoutV4())
         uses(name = "Set up SDK 17", action = SetupJavaV4(
             javaVersion = "17",
