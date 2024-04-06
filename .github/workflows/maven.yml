@@ -28,13 +28,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build and run tests
+    - name: Build and Run Rests
       run: mvn clean test
 
-    - name: Test Report
-      uses: dorny/test-reporter@v1
+    - name: Publish Test Report
       if: success() || failure()
-      with:
-          name: JEST Tests
-          path: reports/jest-*.xml
-          reporter: jest-junit
+      uses: scacap/action-surefire-report@v1
