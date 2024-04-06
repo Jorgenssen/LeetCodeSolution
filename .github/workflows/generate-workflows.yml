@@ -1,0 +1,15 @@
+name: Generate workflows from Kotlin DSL
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-workflows:
+    name: Generate workflows from Kotlin DSL
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the script
+        run: kotlin .github/workflows/maven-workflow.main.kts
