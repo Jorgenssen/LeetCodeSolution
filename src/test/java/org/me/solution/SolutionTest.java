@@ -12,7 +12,7 @@ class SolutionTest {
 
     private final Solution s = new Solution();
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "(note: {0}, magazine: {1}, expected bool: {2})")
     @MethodSource("canConstructTestArguments")
     @DisplayName("Ransom Note")
     void testCanConstruct(String ransomNote, String magazine, boolean expected) {
@@ -28,7 +28,7 @@ class SolutionTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "(number: {0}, expected steps: {1})")
     @MethodSource("numberOfStepsArguments")
     @DisplayName("Number of steps")
     void testNumberOfSteps(int num, int expectedSteps) {
@@ -43,7 +43,7 @@ class SolutionTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "(number: {0}, expected list: {1})")
     @MethodSource("fizzBuzzArguments")
     @DisplayName("Fizz Buzz")
     void testFizzBuzz(int num, List<String> expected) {
