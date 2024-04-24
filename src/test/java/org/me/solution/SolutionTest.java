@@ -1,6 +1,7 @@
 package org.me.solution;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,6 +14,7 @@ class SolutionTest {
 
     @ParameterizedTest
     @MethodSource("canConstructTestArguments")
+    @DisplayName("Ransom Note")
     void testCanConstruct(String ransomNote, String magazine, boolean expected) {
         Assertions.assertEquals(expected, s.canConstruct(ransomNote, magazine));
     }
@@ -28,6 +30,7 @@ class SolutionTest {
 
     @ParameterizedTest
     @MethodSource("numberOfStepsArguments")
+    @DisplayName("Number of steps")
     void testNumberOfSteps(int num, int expectedSteps) {
         Assertions.assertEquals(expectedSteps, s.numberOfSteps(num));
     }
@@ -42,6 +45,7 @@ class SolutionTest {
 
     @ParameterizedTest
     @MethodSource("fizzBuzzArguments")
+    @DisplayName("Fizz Buzz")
     void testFizzBuzz(int num, List<String> expected) {
         Assertions.assertEquals(expected, s.fizzBuzz(num));
     }
