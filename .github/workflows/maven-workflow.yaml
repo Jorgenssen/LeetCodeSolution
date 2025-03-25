@@ -39,7 +39,7 @@ jobs:
         cache: 'maven'
     - id: 'step-2'
       name: 'Build and Test'
-      run: 'mvn --batch-mode -Dmaven.test.failure.ignore=true clean package'
+      run: 'mvnw --batch-mode -Dmaven.test.failure.ignore=true clean package'
     - id: 'step-3'
       name: 'Report'
       uses: 'dorny/test-reporter@v1'
