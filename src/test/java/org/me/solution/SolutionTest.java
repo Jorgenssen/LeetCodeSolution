@@ -57,4 +57,46 @@ class SolutionTest {
                 Arguments.arguments(15, List.of("1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"))
         );
     }
+
+    @ParameterizedTest
+    @MethodSource("maxConsecutiveOnesInArrayArguments")
+    @DisplayName("Maximum number of consecutine ones in array")
+    void testMaxConsecutiveOnesInArray(int[] nums, int expected) {
+        Assertions.assertEquals(expected, s.maxConsecutiveOnesInArray(nums));
+    }
+
+    private static List<Arguments> maxConsecutiveOnesInArrayArguments() {
+        return List.of(
+                Arguments.arguments(new int[]{1,1,0,1,1,1}, 3),
+                Arguments.arguments(new int[]{1,0,1,1,0,1}, 2)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("findNumsWithEvenNumberOfDigitsArguments")
+    @DisplayName("Amount of nums with even number of digits")
+    void testFindNumsWithEvenNumberOfDigits(int[] nums, int expected) {
+        Assertions.assertEquals(expected, s.findNumsWithEvenNumberOfDigits(nums));
+    }
+
+    private static List<Arguments> findNumsWithEvenNumberOfDigitsArguments() {
+        return List.of(
+                Arguments.arguments(new int[]{12,345,2,6,7896}, 2),
+                Arguments.arguments(new int[]{555,901,482,1771}, 1)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("squaresOfASortedArrayArguments")
+    @DisplayName("Squares of a Sorted Array")
+    void testSquaresOfASortedArray(int[] nums, int[] expected) {
+        Assertions.assertArrayEquals(expected, s.squaresOfASortedArray(nums));
+    }
+
+    private static List<Arguments> squaresOfASortedArrayArguments() {
+        return List.of(
+                Arguments.arguments(new int[]{-4,-1,0,3,10}, new int[]{0,1,9,16,100}),
+                Arguments.arguments(new int[]{-7,-3,2,3,11}, new int[]{4,9,9,49,121})
+        );
+    }
 }

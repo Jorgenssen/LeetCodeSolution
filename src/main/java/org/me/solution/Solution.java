@@ -1,9 +1,6 @@
 package org.me.solution;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class Solution {
@@ -52,14 +49,49 @@ public class Solution {
         IntStream.range(1, n + 1).forEach(i -> {
             if ((i % 3 == 0) && (i % 5 == 0)) {
                 result.add("FizzBuzz");
-            } else if ((i % 3 == 0) && (i % 5 != 0)) {
+            } else if (i % 3 == 0) {
                 result.add("Fizz");
-            } else if ((i % 3 != 0) && (i % 5 == 0)) {
+            } else if (i % 5 == 0) {
                 result.add("Buzz");
             } else {
                 result.add(String.valueOf(i));
             }
         });
         return result;
+    }
+
+    public int maxConsecutiveOnesInArray(int[] nums) {
+        int maxOnesFinal = 0;
+        int localMaxOnes = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                localMaxOnes += 1;
+            } else {
+                if (maxOnesFinal <= localMaxOnes) {
+                    maxOnesFinal = localMaxOnes;
+                }
+                localMaxOnes = 0;
+            }
+            if (i == nums.length - 1) {
+                if (maxOnesFinal <= localMaxOnes) {
+                    maxOnesFinal = localMaxOnes;
+                }
+            }
+        }
+        return maxOnesFinal;
+    }
+
+    public int findNumsWithEvenNumberOfDigits(int[] nums) {
+        return (int) Arrays.stream(nums)
+                .map(number -> String.valueOf(number).length())
+                .filter(number -> number % 2 == 0)
+                .count();
+    }
+
+    public int[] squaresOfASortedArray(int[] nums) {
+        return Arrays.stream(nums)
+                .map(number -> number * number)
+                .sorted()
+                .toArray();
     }
 }
