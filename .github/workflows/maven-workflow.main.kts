@@ -36,7 +36,7 @@ workflow(
             javaVersion = "17",
             distribution = SetupJavaV4.Distribution.Temurin,
             cache = SetupJavaV4.BuildPlatform.Maven))
-        run(name = "Build and Test", command = "mvnw --batch-mode -Dmaven.test.failure.ignore=true clean package")
+        run(name = "Build and Test", command = "./mvnw --batch-mode -Dmaven.test.failure.ignore=true clean package")
         uses(name = "Report", action = generateReportAction)
     }
 }.writeToFile()
