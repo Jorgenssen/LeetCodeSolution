@@ -12,7 +12,7 @@ import io.github.typesafegithub.workflows.yaml.writeToFile
 val generateReportAction = CustomAction(
     actionOwner = "dorny",
     actionName = "test-reporter",
-    actionVersion = "v1",
+    actionVersion = "v2",
     inputs = linkedMapOf(
         "name" to "Maven Test Report",
         "path" to "target/surefire-reports/*.xml",
