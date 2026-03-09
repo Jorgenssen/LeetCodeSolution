@@ -14,7 +14,6 @@ public class Solution {
 
         for (int i = 0; i < magazine.length(); i++) {
             char m = magazine.charAt(i);
-
             int currentCount = magazineLetters.getOrDefault(m, 0);
             magazineLetters.put(m, ++currentCount);
         }
