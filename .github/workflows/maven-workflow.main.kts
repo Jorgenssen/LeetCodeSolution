@@ -1,13 +1,17 @@
 #!/usr/bin/env kotlin
-@file:DependsOn("io.github.typesafegithub:github-workflows-kt:1.13.0")
+@file:Repository("https://repo.maven.apache.org/maven2/")
+@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.7.0")
+@file:Repository("https://bindings.krzeminski.it")
+@file:DependsOn("actions:checkout:v4")
+@file:DependsOn("actions:setup-java:v4")
 
-import io.github.typesafegithub.workflows.actions.actions.CheckoutV4
-import io.github.typesafegithub.workflows.actions.actions.SetupJavaV4
+import io.github.typesafegithub.workflows.actions.actions.Checkout
+import io.github.typesafegithub.workflows.actions.actions.SetupJava
 import io.github.typesafegithub.workflows.domain.RunnerType
 import io.github.typesafegithub.workflows.domain.actions.CustomAction
 import io.github.typesafegithub.workflows.domain.triggers.Push
+import io.github.typesafegithub.workflows.domain.triggers.WorkflowDispatch
 import io.github.typesafegithub.workflows.dsl.workflow
-import io.github.typesafegithub.workflows.yaml.writeToFile
 
 val generateReportAction = CustomAction(
     actionOwner = "dorny",
@@ -23,20 +27,22 @@ val generateReportAction = CustomAction(
 
 workflow(
     name = "Java CI with Maven from kotlin",
-    on = listOf(Push(branches = listOf("main"))),
-    sourceFile = __FILE__.toPath(),
+    on = listOf(
+        Push(branches = listOf("main")),
+        WorkflowDispatch()),
+    sourceFile = __FILE__,
 ) {
     job(
         id = "BuildAndTest",
         name = "Build And Test",
         runsOn = RunnerType.UbuntuLatest
     ) {
-        uses(name = "Check out", action = CheckoutV4())
-        uses(name = "Set up SDK 17", action = SetupJavaV4(
+        uses(name = "Check out", action = Checkout())
+        uses(name = "Set up SDK 17", action = SetupJava(
             javaVersion = "17",
-            distribution = SetupJavaV4.Distribution.Temurin,
-            cache = SetupJavaV4.BuildPlatform.Maven))
+            distribution = SetupJava.Distribution.Temurin,
+            cache = SetupJava.BuildPlatform.Maven))
         run(name = "Build and Test", command = "./mvnw --batch-mode -Dmaven.test.failure.ignore=true clean test")
         uses(name = "Report", action = generateReportAction)
     }
-}.writeToFile()
+}
